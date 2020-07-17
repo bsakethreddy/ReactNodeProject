@@ -14,7 +14,7 @@ module.exports = (app) => {
         req.logout(); //this func is automatically attacked by passport
         res.send(req.user);
     });
-    //passport attaches user to req
+    //cookie session attaches data to req and passport tries to extract it. req.session
     app.get('/api/current_user', (req, res) => {
         res.send(req.user);
     });
