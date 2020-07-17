@@ -25,7 +25,9 @@ passport.use(new GoogleStrategy({
     clientSecret: keys.googleClientsecret,
     //this is the Url user will be redirected after user grants permission. we keep this link also in google oath
     //so that google cross verifies
-    callbackURL : '/auth/google/callback'
+    callbackURL : '/auth/google/callback',
+    //to not get error bcz of http or https
+    proxy : true
     },
     //second argument to google auth, callback function logic. We tell passport that we are done by using 'done'
     (accessToken, refreshToken, profile, done) => {

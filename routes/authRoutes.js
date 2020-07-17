@@ -9,6 +9,7 @@ module.exports = (app) => {
         })
     );
     //Take the code that we got from above call and use it to get the profile info
+    //while sending the callback from google all the middleware cookiesession and all happen
     app.get('/auth/google/callback', passport.authenticate('google') );
     app.get('/api/logout', (req,res) => {
         req.logout(); //this func is automatically attacked by passport
