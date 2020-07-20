@@ -1,0 +1,41 @@
+//heroku does npm start, so we add 'start' as a script in package.json
+//this is the Profile we get back from Google Oath. here _id is the id that mongo assigned
+{"_id":{"$oid":"5f0f221a7a6b08320c131bbd"},"googleId":"112798401446721008172","__v":{"$numberInt":"0"}}
+Link to Serialize and Deserialize : https://stackoverflow.com/questions/27637609/understanding-passport-serialize-deserialize
+cookie session process the incoming request and populating the req.session(attaches data to req) and passport tries to extract it
+//mongo prod username = sakethreddyprod, password = sakethreddy
+//heroku site, my site = https://peaceful-escarpment-36394.herokuapp.com/
+//to run express server
+"server": "nodemon index.js",
+//to run react server, --prefix is to go inside client folder and run this command
+"client" : "npm run start --prefix client",
+//concurrently is a npm modeule to run both client and server '/' is to escape double quotes
+"dev" : "concurrently \"npm run server\" \"npm run client\""
+
+Async Calls, promise returns
+//Write a function to returieve a blob of json
+//make an ajax request! Use the 'fetch' function.
+//https://rallycoding.herokuapp.com/api/music_albums to get a json
+//copy paste this in developer consoler in browser
+//fectch returns a promise
+function fetchAlbums(){
+    fetch('https://rallycoding.herokuapp.com/api/music_albums')
+    //to work with the json value, we do res.json() which returns a promise
+    .then(res => res.json())
+    .then(json => console.log(json))
+}
+fetchAlbums();
+//In a synchronous environment, where the request function returns only after it has done its work
+//async calls doesnt wait for the return
+//New ES2017 syntax, copy past below code in babel to know the Es script
+async function fetchAlbums(){  or const fetchAlbums async () = { the below code}
+    //its not actually waiting, the interpretor does other works
+    const res = await fetch('https://rallycoding.herokuapp.com/api/music_albums');
+    const json = await  res.json();
+    console.log(json)
+}
+fetchAlbums();
+//Known as arrow function
+() => {
+
+}

@@ -30,23 +30,19 @@ passport.use(new GoogleStrategy({
     proxy : true
     },
     //second argument to google auth, callback function logic. We tell passport that we are done by using 'done'
-    (accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
         //check if the user already exists
-        //this is an asynchronus call so we cant use const user = User.findOne().instead returnspromise(so we use then)
-        User.findOne({googleId : profile.id})
-            .then((existingUser) => {
-                if(existingUser){
-                    //we already have an record with this id
-                    //null - means no error, second argument- tells passport we are finished, this is the user
-                    done(null,existingUser);
-                }else{
-                    //make an new record with this Id
-                    //creates a new model instance of the user,like one record in DB
-                    //save will save this model instance in DB.
-                    new User({ googleId : profile.id})
-                    .save()
-                    .then(user => done(null, user));
-                }
-            });
+        //this is an asynchronus call so it returns returnspromise(so we use .'then' OR awaitsync)
+        const existingUser = await User.findOne({googleId : profile.id}); 
+        if(existingUser){
+            //we already have an record with this id
+            //null - means no error, second argument- tells passport we are finished, this is the user
+            return done(null,existingUser);
+        }
+        //make an new record with this Id
+        //creates a new model instance of the user,like one record in DB
+        //save will save this model instance in DB.
+        const user =  await new User({ googleId : profile.id}).save();
+        done(null, user);
     } 
 ));

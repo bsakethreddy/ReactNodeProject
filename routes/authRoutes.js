@@ -10,10 +10,18 @@ module.exports = (app) => {
     );
     //Take the code that we got from above call and use it to get the profile info
     //while sending the callback from google all the middleware cookiesession and all happen
-    app.get('/auth/google/callback', passport.authenticate('google') );
+    //The middleware passport.authenticate()- takes incoming req, it takes the code out of req, and then goes
+    //and fetches the user profile and then it calls our call back in Google Strategy. and then redirect.
+    app.get(
+        '/auth/google/callback',
+         passport.authenticate('google'),
+        (req, res) => {
+            res.redirect('/surveys');
+        }
+         );
     app.get('/api/logout', (req,res) => {
         req.logout(); //this func is automatically attacked by passport
-        res.send(req.user);
+        res.redirect('/');
     });
     //cookie session attaches data to req and passport tries to extract it. req.session
     app.get('/api/current_user', (req, res) => {
