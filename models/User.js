@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const {Schema} = mongoose;
 
 const userSchema = new Schema({
-    googleId : String
+    googleId : String,
+    credits : {type : Number, default: 0}
 });
 
 //creating a collection 'users' with userSchema, we can fetch this object in passport file and create new record there

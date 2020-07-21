@@ -14,3 +14,5 @@ ReactDOM.render(
 //Provider is a react component that know how to rechnage redux store, an it informs all its children component (App)
 <Provider store = {store}> <App/> </Provider>, 
 document.querySelector('#root'));
+console.log('stripe key is ', process.env.REACT_APP_STRIPE_KEY);
+console.log('environment is ', process.env.NODE_ENV);

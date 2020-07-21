@@ -20,7 +20,7 @@ module.exports = (app) => {
         }
          );
     app.get('/api/logout', (req,res) => {
-        req.logout(); //this func is automatically attacked by passport
+        req.logout(); //this func is automatically attached by passport
         res.redirect('/');
     });
     //cookie session attaches data to req and passport tries to extract it. req.session
