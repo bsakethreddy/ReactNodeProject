@@ -36,7 +36,18 @@ app.use(passport.session());
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
 
-
+//only in production, for the routes which are not defined in server but defined by react router in client
+if(process.env.NODE_ENV == 'production'){
+    //express will serveup production assets like our main.js, or main.css file
+    //if any get req comes and we dont have then look into client/build file.
+    app.use(express.static('client/build'));
+    //express will serveup the index.html file if it dosent recognize the route
+    //after checking build file, still we dont have the resource give them back the index.html
+    const path = require('path');
+    app.get('*', (req,res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
 
 
 const PORT = process.env.PORT || 5000;
