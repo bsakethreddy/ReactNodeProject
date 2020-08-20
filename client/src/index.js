@@ -7,6 +7,9 @@ import reduxThunk from 'redux-thunk';
 
 import App from './components/App';
 import reducers from './reducers';
+//development only axios helpers
+import axios from 'axios';
+window.axios = axios;
 //To create a new instance of our redux store with reducer, second arg is initial state
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk)); 
 //Takes two arguments , first is App component instance and second where we want to render a DOM node.

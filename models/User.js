@@ -1,7 +1,7 @@
-const { Mongoose } = require("mongoose");
+//const { Mongoose } = require("mongoose");
 const mongoose = require('mongoose');
 //the below line is known as destructuring, it is same as const Schema = mongoose.Schema
-//Schema object to define individual record property
+//Schema object to define individual record property,all the properties the model class hav
 const {Schema} = mongoose;
 
 const userSchema = new Schema({
