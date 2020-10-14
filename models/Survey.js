@@ -13,6 +13,7 @@ const surveySchema = new Schema({
     no : {type : Number, default: 0},
     //relatin with user and survey, every survey belong a user
     //we assign a type ID ie user id, ref : User tells mongoose that this belongs to User collection
+    //mangoose automatically takes User as users
     _user : {type: Schema.Types.ObjectId, ref: 'User' },
     dateSent : Date,
     lastResponded: Date

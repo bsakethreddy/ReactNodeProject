@@ -39,3 +39,7 @@ fetchAlbums();
 () => {
 
 }
+
+//webhook
+run ->  npx ngrok http 5000, which will open a server which redireccts to localhost:5000
+and paste the url in sendgrid mail setting mail webhook

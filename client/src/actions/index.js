@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {FETCH_USER} from './types';
+import {FETCH_USER, FETCH_SURVEYS} from './types';
 //Purpose of an action creator is to return a action that will be sent to all diff reducers, which then produce
 //new values of the state and updates that state inside the redux store, the redux store then sends the updated
 //state back to all react components.
@@ -7,15 +7,29 @@ import {FETCH_USER} from './types';
 export const fetchUser = () => async dispatch => {
         //To make contact to backend server
         //we want to dispatch only after this request is completed
-        const res = await axios.get('api/current_user');
+        const res = await axios.get('/api/current_user');
         dispatch({type: FETCH_USER, payload: res.data});
     };
 //new action creator, we need to makesure that this is called when we get token from stripecheckout form
 //import connect and * actions in Payments.js
 export const handleToken = token => async dispatch => {
-    const res = await axios.post('api/stripe', token);
+    const res = await axios.post('/api/stripe', token);
     //what action we despatch? reuse the FETCH_USER type whcih contains the payload user model
     //Usermodel automatically updates, the authreduces pickups the updated usermodel
     //the hook this action creator to Payments component
     dispatch({type: FETCH_USER, payload: res.data});
 };
+
+//new action creator for post request of values, 
+
+export const  submitSurvey = (values, history )=> async dispatch => {
+    const res = await axios.post('/api/surveys', values);
+    history.push('/surveys');
+    //update the local user model
+    dispatch({type: FETCH_USER, payload: res.data});
+}
+
+export const fetchSurveys = () => async dispatch => {
+    const res = await axios.get('/api/surveys');
+    dispatch({type: FETCH_SURVEYS, payload: res.data});
+}
